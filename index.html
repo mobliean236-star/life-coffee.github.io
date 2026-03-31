@@ -362,9 +362,13 @@ function renderCartOverlay(){
   }
 }
 
+// MODIFIED SEND FUNCTION WITH FIXED ODR ID
 function send(){
   if(Object.keys(cart).length===0){alert("Please add drinks!"); return;}
-  let msg="Order:\n";
+
+  const orderId = 'ODR' + Math.floor(1000 + Math.random() * 9000); // ODR unique
+  let msg=`Order ${orderId}:\n`; // cannot be modified by client
+
   let total=0;
   for(let item in cart){
     let qty=cart[item];
@@ -373,6 +377,7 @@ function send(){
     msg+=`${item} x${qty}\n`;
   }
   msg+="Total: "+total.toLocaleString()+"₭";
+
   window.open("https://wa.me/8562092747227?text="+encodeURIComponent(msg));
 }
 
