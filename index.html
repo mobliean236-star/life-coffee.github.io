@@ -2,253 +2,158 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Life Coffee</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
 body {
-  margin:0;
-  font-family:'Montserrat',sans-serif;
-  background:#000;
-  color:white;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: black;
+  color: white;
 }
 
-/* HEADER */
+/* Header */
 .header {
-  text-align:center;
-  padding:80px 20px;
-  background:url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-  position:relative;
+  text-align: center;
+  padding: 20px;
 }
-.header::after {
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.6);
-}
+
 .header h1 {
-  position:relative;
-  font-size:60px;
-  font-weight:900;
-  color: #fff; /* texte blanc */
-  text-shadow:
-    0 0 5px #000,
-    0 0 10px #000,
-    0 0 20px #000,
-    0 0 40px #000,
-    0 0 80px #000;
+  font-size: 48px;
+  color: white;
+  text-shadow: 0 0 15px black;
 }
+
 .header p {
-  position:relative;
-  color: #fff; /* SLOWBAR en blanc */
-  margin-top:10px;
-  font-weight:bold;
-  font-size:22px;
-  text-shadow: 0 0 5px #000; /* petit shader noir */
+  color: white;
+  text-shadow: 0 0 10px black;
+  font-size: 24px;
 }
 
-/* SECTION TITLE */
+/* Section titles */
 .section-title {
-  text-align:center;
-  font-size:22px;
-  border-bottom:1px solid #444;
-  padding-bottom:10px;
-  margin:30px 0 10px 0;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 22px;
+  border-bottom: 1px solid #444;
+  padding-bottom: 10px;
 }
 
-/* GRID */
+/* Grid */
 .grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-  padding:0 20px 20px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }
 
-/* CARD */
+/* Card */
 .card {
-  background:#111;
-  border-radius:15px;
-  overflow:hidden;
-  position:relative;
-  transition:0.3s;
+  background: #111;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.3s;
 }
+
 .card:hover {
-  transform:scale(1.05);
-  box-shadow:0 0 20px #0ff;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #0ff;
 }
+
 .card img {
-  width:100%;
-  height:180px;
-  object-fit:cover;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
 }
+
 .card-content {
-  padding:10px;
-  text-align:center;
+  padding: 10px;
 }
+
 .price {
-  color:#0ff; /* néon bleu futuriste */
-  font-weight:bold;
+  color: #0ff; /* neon blue for prices */
+  font-weight: bold;
 }
 
-/* BEST SELLER */
-.badge {
-  position:absolute;
-  top:10px;
-  left:10px;
-  background:#0ff;
-  color:black;
-  padding:5px 10px;
-  border-radius:20px;
-  font-size:12px;
-  animation: pulse 1.2s infinite;
-}
-@keyframes pulse {
-  0% {transform:scale(1);}
-  50% {transform:scale(1.1);}
-  100% {transform:scale(1);}
+/* Floating buttons */
+.float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-/* CONTROLS */
-.controls {
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:10px;
-  margin-top:10px;
-}
-.controls button {
-  background:#0ff;
-  border:none;
-  width:30px;
-  height:30px;
-  border-radius:50%;
-  font-weight:bold;
-  cursor:pointer;
-  transition:0.2s;
-}
-.controls button.adding {
-  animation: flash 0.3s;
-}
-@keyframes flash {
-  0% {transform:scale(1);}
-  50% {transform:scale(1.4);}
-  100% {transform:scale(1);}
-}
-.qty {
-  min-width:20px;
-  text-align:center;
+.float a button {
+  padding: 12px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-/* MINI CART FLOAT */
-.mini-cart {
-  position:fixed;
-  top:20px;
-  right:20px;
-  background:#111;
-  border:2px solid #0ff;
-  padding:10px 20px;
-  border-radius:30px;
-  cursor:pointer;
-  z-index:999;
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-.mini-cart span {
-  font-weight:bold;
-  color:#0ff;
+/* WhatsApp */
+.whatsapp {
+  background: #25D366;
+  color: white;
 }
 
-/* CART OVERLAY */
-.cart-overlay {
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.8);
-  display:none;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  z-index:1000;
-}
-.cart-overlay .cart-content {
-  background:#111;
-  padding:20px;
-  border-radius:20px;
-  width:90%;
-  max-width:400px;
-}
-.cart-overlay h2 {
-  text-align:center;
-  margin-bottom:10px;
-  color:#0ff;
-}
-.cart-overlay ul {
-  list-style:none;
-  padding:0;
-  max-height:300px;
-  overflow-y:auto;
-}
-.cart-overlay li {
-  display:flex;
-  justify-content:space-between;
-  padding:5px 0;
-  border-bottom:1px solid #444;
-}
-.cart-overlay button {
-  margin-top:10px;
-  width:100%;
-  padding:10px;
-  background:#25D366;
-  border:none;
-  border-radius:20px;
-  font-weight:bold;
-  cursor:pointer;
-  color:white;
-}
-.cart-overlay .close-btn {
-  background:#0ff;
-  margin-bottom:10px;
-  color:black;
+/* Map button */
+.mapbtn {
+  background: #0ff;
+  color: black;
 }
 
-/* FLOAT BUTTON ORDER DIRECT */
-.float-order {
-  position:fixed;
-  bottom:80px; /* reculé pour ne pas cacher la map */
-  left:50%;
-  transform:translateX(-50%);
-  z-index:999;
-}
-.float-order button {
-  background:#25D366;
-  color:white;
-  padding:15px 30px;
-  border:none;
-  border-radius:50px;
-  font-weight:bold;
-  cursor:pointer;
-  box-shadow:0 0 15px #25D366;
-  transition:0.3s;
-}
-.float-order button:hover {
-  transform:scale(1.05);
-  box-shadow:0 0 25px #25D366;
+/* Cart */
+#cart {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #111;
+  padding: 15px;
+  border-radius: 10px;
+  width: 250px;
+  max-height: 400px;
+  overflow-y: auto;
+  box-shadow: 0 0 20px #0ff;
 }
 
-/* LOCATION */
-.location {
-  text-align:center;
-  margin:30px 0;
+#cart h3 {
+  margin: 0 0 10px 0;
+  color: #0ff;
 }
-.location button {
-  padding:10px 20px;
-  background:#0ff;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
-  color:black;
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+/* BCEL QR Section */
+#bcel-qr {
+  text-align: center;
+  margin: 30px 0;
+}
+
+#bcel-qr h2 {
+  color: #0ff;
+  font-size: 28px;
+  text-shadow: 0 0 10px #0ff;
+}
+
+#bcel-qr img {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #0ff;
+}
+
+#bcel-qr p {
+  color: white;
+  margin-top: 10px;
 }
 </style>
 </head>
@@ -257,7 +162,7 @@ body {
 
 <div class="header">
   <h1>LIFE COFFEE</h1>
-  <p>SLOWBAR</p>
+  <p>SLOW BAR</p>
 </div>
 
 <div class="section-title">COFFEE</div>
@@ -266,145 +171,122 @@ body {
 <div class="section-title">NON COFFEE</div>
 <div id="noncoffee" class="grid"></div>
 
-<div class="location">
-  <h2>📍 Location</h2>
-  <a href="https://www.google.com/maps?q=19.895000663346558,102.14216503795944" target="_blank">
-    <button>Open Map</button>
-  </a>
+<!-- Cart -->
+<div id="cart">
+  <h3>Cart</h3>
+  <div id="cart-items"></div>
+  <p><strong>Total:</strong> <span id="cart-total">0</span>k</p>
+  <button onclick="payBCEL()">Order & Pay via BCEL</button>
 </div>
 
-<div class="mini-cart" onclick="toggleCart()">
-  🛒 <span id="mini-count">0</span> | <span id="mini-total">0₭</span>
+<!-- BCEL QR Section -->
+<div id="bcel-qr">
+  <h2>Pay via BCEL</h2>
+  <img src="d0237a2a-738d-4c39-b6f0-aa184658388e.png" alt="BCEL QR Code">
+  <p>Scan this QR code with BCEL app to pay</p>
+  <p style="color:#0ff;" id="order-code-display"></p>
 </div>
 
-<div class="cart-overlay" id="cartOverlay">
-  <div class="cart-content">
-    <button class="close-btn" onclick="toggleCart()">← Back</button>
-    <h2>Your Cart</h2>
-    <ul id="cartItems"></ul>
-    <button onclick="send()">Order via WhatsApp</button>
-  </div>
-</div>
-
-<div class="float-order">
-  <button onclick="send()">Order & Pay via WhatsApp</button>
+<!-- Floating buttons -->
+<div class="float">
+  <a href="https://wa.me/8562092747227" target="_blank"><button class="whatsapp">WhatsApp</button></a>
+  <a href="https://www.google.com/maps?q=19.895000663346558,102.14216503795944" target="_blank"><button class="mapbtn">Map</button></a>
 </div>
 
 <script>
-let cart={};
-
-const coffee=[
-{name:"Espresso", price:35000, img:"https://images.unsplash.com/photo-1584270354949-fc7e4ff3d2c1?auto=format&fit=crop&w=400&q=80"},
-{name:"Americano", price:30000, img:"https://images.unsplash.com/photo-1605475125393-14edcf6c39f8?auto=format&w=400&q=80"},
-{name:"Cappuccino", price:35000, img:"https://images.unsplash.com/photo-1617196030787-556c92a7e8a2?auto=format&w=400&q=80"},
-{name:"Latte", price:35000, img:"https://images.unsplash.com/photo-1568931913875-fc68fdd2f4a5?auto=format&w=400&q=80"},
-{name:"Mocha", price:40000, img:"https://images.unsplash.com/photo-1584270354949-fc7e4ff3d2c1?auto=format&w=400&q=80"},
-{name:"Vanilla Latte", price:40000, img:"https://images.unsplash.com/photo-1622010082151-7fda5f77d8f5?auto=format&w=400&q=80"},
-{name:"Caramel Latte", price:45000, img:"https://images.unsplash.com/photo-1617196030787-556c92a7e8a2?auto=format&w=400&q=80"},
-{name:"Orange Coffee", price:45000, best:true, img:"https://images.unsplash.com/photo-1605475125393-14edcf6c39f8?auto=format&w=400&q=80"},
-{name:"Coconut Coffee", price:45000, best:true, img:"https://images.unsplash.com/photo-1568931913875-fc68fdd2f4a5?auto=format&w=400&q=80"}
+// Menu
+const coffee = [
+  {name:"Espresso", price:35},
+  {name:"Americano", price:30},
+  {name:"Cappuccino", price:35},
+  {name:"Latte", price:35},
+  {name:"Mocha", price:40},
+  {name:"Vanila latte", price:40},
+  {name:"Caramel latte", price:45},
+  {name:"Orange coffee", price:45},
+  {name:"Coconut coffee", price:45}
 ];
 
-const noncoffee=[
-{name:"Matcha Coconut", price:50000, img:"https://images.unsplash.com/photo-1605475125393-14edcf6c39f8?auto=format&w=400&q=80"},
-{name:"Matcha Latte", price:45000, img:"https://images.unsplash.com/photo-1622010082151-7fda5f77d8f5?auto=format&w=400&q=80"},
-{name:"Strawberry Milk", price:35000, img:"https://images.unsplash.com/photo-1617196030787-556c92a7e8a2?auto=format&w=400&q=80"},
-{name:"Cocoa Strawberry", price:45000, img:"https://images.unsplash.com/photo-1605475125393-14edcf6c39f8?auto=format&w=400&q=80"},
-{name:"Cocoa Latte", price:35000, img:"https://images.unsplash.com/photo-1568931913875-fc68fdd2f4a5?auto=format&w=400&q=80"},
-{name:"Matcha Strawberry", price:50000, img:"https://images.unsplash.com/photo-1622010082151-7fda5f77d8f5?auto=format&w=400&q=80"},
-{name:"Green Tea", price:35000, img:"https://images.unsplash.com/photo-1617196030787-556c92a7e8a2?auto=format&w=400&q=80"},
-{name:"Thai Milk Tea", price:35000, img:"https://images.unsplash.com/photo-1605475125393-14edcf6c39f8?auto=format&w=400&q=80"},
-{name:"Cocoa Coconut", price:45000, img:"https://images.unsplash.com/photo-1568931913875-fc68fdd2f4a5?auto=format&w=400&q=80"}
+const noncoffee = [
+  {name:"Matcha coconut", price:50},
+  {name:"Matcha Latte", price:45},
+  {name:"Strawberry milk", price:35},
+  {name:"Cocoa strawberry", price:45},
+  {name:"Cocoalate", price:35},
+  {name:"Matcha Strawberry", price:50},
+  {name:"Green tea", price:35},
+  {name:"Thai milk tea", price:35},
+  {name:"Cocoa coconut", price:45}
 ];
 
-function add(name, btn){
-  cart[name] = (cart[name] || 0) + 1;
-  btn.classList.add('adding');
-  setTimeout(()=>btn.classList.remove('adding'),300);
-  updateMiniCart();
-  renderCartOverlay();
-  document.getElementById(`qty-${name}`).innerText = cart[name];
-}
+// Cart
+let cart = [];
 
-function remove(name){
-  if(cart[name]){
-    cart[name]--;
-    if(cart[name]<=0) delete cart[name];
-  }
-  updateMiniCart();
-  renderCartOverlay();
-  document.getElementById(`qty-${name}`).innerText = cart[name] || 0;
-}
-
-function updateMiniCart(){
-  let totalQty=0,totalPrice=0;
-  [...coffee,...noncoffee].forEach(item=>{
-    let qty=cart[item.name]||0;
-    totalQty+=qty;
-    totalPrice+=qty*item.price;
-  });
-  document.getElementById('mini-count').innerText=totalQty;
-  document.getElementById('mini-total').innerText=totalPrice.toLocaleString()+"₭";
-}
-
-function toggleCart(){
-  const overlay=document.getElementById('cartOverlay');
-  overlay.style.display=overlay.style.display==='flex'?'none':'flex';
-}
-
-function renderCartOverlay(){
-  const ul=document.getElementById('cartItems');
-  ul.innerHTML='';
-  for(let item in cart){
-    let qty=cart[item];
-    let price=[...coffee,...noncoffee].find(m=>m.name===item).price;
-    ul.innerHTML+=`<li>${item} x${qty} - ${(qty*price).toLocaleString()}₭</li>`;
-  }
-}
-
-function send(){
-  if(Object.keys(cart).length===0){alert("Please add drinks!"); return;}
-  let msg="Order:\n";
-  let total=0;
-  for(let item in cart){
-    let qty=cart[item];
-    let price=[...coffee,...noncoffee].find(m=>m.name===item).price;
-    total+=price*qty;
-    msg+=`${item} x${qty}\n`;
-  }
-  msg+="Total: "+total.toLocaleString()+"₭";
-  window.open("https://wa.me/8562092747227?text="+encodeURIComponent(msg));
-}
-
-function renderSection(list, containerId){
-  const container=document.getElementById(containerId);
-  container.innerHTML='';
-  list.forEach(item=>{
-    container.innerHTML+=`
-      <div class="card">
-        ${item.best?'<div class="badge">🔥 BEST SELLER</div>':''}
-        <img src="${item.img}">
+// Render categories
+function renderCategory(list, containerId){
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+  list.forEach(item => {
+    container.innerHTML += `
+      <div class="card" onclick="addToCart('${item.name}',${item.price})">
+        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=400&q=80">
         <div class="card-content">
           <h3>${item.name}</h3>
-          <p class="price">${item.price.toLocaleString()}₭</p>
-          <div class="controls">
-            <button onclick="remove('${item.name}')">-</button>
-            <div id="qty-${item.name}" class="qty">${cart[item.name]||0}</div>
-            <button onclick="add('${item.name}',this)">+</button>
-          </div>
+          <p class="price">${item.price}k</p>
         </div>
       </div>
     `;
   });
 }
 
-function render(){
-  renderSection(coffee,'coffee');
-  renderSection(noncoffee,'noncoffee');
+// Add to cart
+function addToCart(name, price){
+  const existing = cart.find(i => i.name === name);
+  if(existing){
+    existing.qty++;
+  } else {
+    cart.push({name, price, qty:1});
+  }
+  updateCart();
 }
 
-render();
-</script>
+// Update cart display
+function updateCart(){
+  const container = document.getElementById('cart-items');
+  container.innerHTML = "";
+  let total = 0;
+  cart.forEach(item => {
+    container.innerHTML += `<div class="cart-item">${item.name} x${item.qty} - ${item.price*item.qty}k</div>`;
+    total += item.price * item.qty;
+  });
+  document.getElementById('cart-total').innerText = total;
+}
 
+// Generate unique order code
+function generateOrderCode() {
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const numbers = '0123456789';
+  let code = 'ORD';
+  for(let i=0;i<3;i++) code += letters[Math.floor(Math.random()*letters.length)];
+  for(let i=0;i<3;i++) code += numbers[Math.floor(Math.random()*numbers.length)];
+  return code;
+}
+
+// Pay via BCEL
+function payBCEL(){
+  if(cart.length === 0){
+    alert("Your cart is empty!");
+    return;
+  }
+  const code = generateOrderCode();
+  document.getElementById('order-code-display').innerText = "Your order code: " + code;
+  alert("Your order code: " + code + "\nScan the BCEL QR code to pay.");
+}
+
+// Initial render
+renderCategory(coffee, "coffee");
+renderCategory(noncoffee, "noncoffee");
+
+</script>
 </body>
 </html>
