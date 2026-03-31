@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Life Coffee</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
 body {
@@ -14,154 +14,136 @@ body {
   color: white;
 }
 
-/* Container principal */
-.menu-container {
-  max-width: 900px;
-  margin: auto;
-  padding: 30px;
-}
-
 /* Header */
 .header {
   text-align: center;
-  margin-bottom: 40px;
+  padding: 20px;
 }
 
-.header h1 {
-  letter-spacing: 6px;
-  font-weight: 700;
-}
-
-.header p {
-  color: #c8a97e;
-  letter-spacing: 3px;
-}
-
-/* Section */
-.section {
-  margin-bottom: 40px;
-}
-
-.section h2 {
-  border-bottom: 1px solid #c8a97e;
-  padding-bottom: 10px;
+/* Language buttons */
+.lang {
+  text-align: center;
   margin-bottom: 20px;
-  letter-spacing: 3px;
 }
 
-/* Item */
-.item {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px 0;
-  border-bottom: 1px solid #222;
+.lang button {
+  margin: 5px;
+  padding: 8px 15px;
+  border: none;
+  background: #c8a97e;
   cursor: pointer;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Card */
+.card {
+  background: #111;
+  border-radius: 10px;
+  overflow: hidden;
   transition: 0.3s;
+  cursor: pointer;
 }
 
-.item:hover {
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 10px;
+}
+
+.price {
   color: #c8a97e;
-  transform: translateX(5px);
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .menu-container {
-    padding: 20px;
-  }
+/* Section title */
+.section {
+  padding: 20px;
+  font-size: 20px;
+  border-bottom: 1px solid #333;
 }
 </style>
 
 <script>
-function order(item) {
-  const message = "Hello, I would like to order " + item;
-  window.open("https://wa.me/8562092747227?text=" + encodeURIComponent(message));
+let currentLang = "en";
+
+const products = [
+  {name_en:"Espresso", name_la:"ກາເຟ Espresso", price:"35k"},
+  {name_en:"Americano", name_la:"Americano", price:"30k"},
+  {name_en:"Cappuccino", name_la:"Cappuccino", price:"35k"},
+  {name_en:"Latte", name_la:"Latte", price:"35k"},
+  {name_en:"Mocha", name_la:"Mocha", price:"40k"},
+  {name_en:"Matcha Latte", name_la:"Matcha Latte", price:"45k"},
+  {name_en:"Thai milk tea", name_la:"ຊານົມໄທ", price:"35k"}
+];
+
+function setLang(lang){
+  currentLang = lang;
+  render();
+}
+
+function order(name){
+  let text = currentLang === "la"
+    ? "ຂ້ອຍຢາກສັ່ງ " + name
+    : "Hello, I would like to order " + name;
+
+  window.open("https://wa.me/8562092747227?text=" + encodeURIComponent(text));
+}
+
+function render(){
+  const container = document.getElementById("products");
+  container.innerHTML = "";
+
+  products.forEach(p => {
+    const name = currentLang === "la" ? p.name_la : p.name_en;
+
+    container.innerHTML += `
+      <div class="card" onclick="order('${name}')">
+        <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=400&q=80">
+        <div class="card-content">
+          <h3>${name}</h3>
+          <p class="price">${p.price}</p>
+        </div>
+      </div>
+    `;
+  });
 }
 </script>
 
 </head>
 
-<body>
+<body onload="render()">
 
-<div class="menu-container">
-
-  <div class="header">
-    <h1>LIFECOFFEE</h1>
-    <p>SLOWBAR</p>
-  </div>
-
-  <!-- COFFEE -->
-  <div class="section">
-    <h2>COFFEE</h2>
-
-    <div class="item" onclick="order('Espresso')">
-      <span>Espresso</span><span>35k</span>
-    </div>
-    <div class="item" onclick="order('Americano')">
-      <span>Americano</span><span>30k</span>
-    </div>
-    <div class="item" onclick="order('Cappuccino')">
-      <span>Cappuccino</span><span>35k</span>
-    </div>
-    <div class="item" onclick="order('Latte')">
-      <span>Latte</span><span>35k</span>
-    </div>
-    <div class="item" onclick="order('Mocha')">
-      <span>Mocha</span><span>40k</span>
-    </div>
-    <div class="item" onclick="order('Vanila latte')">
-      <span>Vanila latte</span><span>40k</span>
-    </div>
-    <div class="item" onclick="order('Caramel latte')">
-      <span>Caramel latte</span><span>45k</span>
-    </div>
-    <div class="item" onclick="order('Orange coffee')">
-      <span>Orange coffee</span><span>45k</span>
-    </div>
-    <div class="item" onclick="order('Coconut coffee')">
-      <span>Coconut coffee</span><span>45k</span>
-    </div>
-  </div>
-
-  <!-- NON COFFEE -->
-  <div class="section">
-    <h2>NON COFFEE</h2>
-
-    <div class="item" onclick="order('Matcha coconut')">
-      <span>Matcha coconut</span><span>50k</span>
-    </div>
-    <div class="item" onclick="order('Matcha Latte')">
-      <span>Matcha Latte</span><span>45k</span>
-    </div>
-    <div class="item" onclick="order('Strawberry milk')">
-      <span>Strawberry milk</span><span>35k</span>
-    </div>
-    <div class="item" onclick="order('Cocoa strawberry')">
-      <span>Cocoa strawberry</span><span>45k</span>
-    </div>
-    <div class="item" onclick="order('Cocoalate')">
-      <span>Cocoalate</span><span>35k</span>
-    </div>
-    <div class="item" onclick="order('Matcha Strawberry')">
-      <span>Matcha Strawberry</span><span>50k</span>
-    </div>
-    <div class="item" onclick="order('Green tea')">
-      <span>Green tea</span><span>35k</span>
-    </div>
-    <div class="item" onclick="order('Thai milk tea')">
-      <span>Thai milk tea</span><span>35k</span>
-    </div>
-    <div class="item" onclick="order('Cocoa coconut')">
-      <span>Cocoa coconut</span><span>45k</span>
-    </div>
-  </div>
-
+<div class="header">
+  <h1>LIFE COFFEE</h1>
+  <p style="color:#c8a97e;">SLOWBAR</p>
 </div>
+
+<div class="lang">
+  <button onclick="setLang('en')">English</button>
+  <button onclick="setLang('la')">Lao</button>
+</div>
+
+<div class="section">Menu</div>
+
+<div id="products" class="grid"></div>
 
 </body>
 </html>
-  
 
 
-
-
+    
+      
