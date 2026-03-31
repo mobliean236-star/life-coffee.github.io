@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Life Coffee</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
@@ -20,22 +21,16 @@ body {
   padding: 20px;
 }
 
-/* Language */
-.lang {
-  text-align: center;
-  margin-bottom: 20px;
+.header h1 {
+  margin: 0;
 }
 
-.lang button {
-  margin: 5px;
-  padding: 8px 15px;
-  border: none;
-  background: #c8a97e;
-  cursor: pointer;
-  border-radius: 5px;
+.header p {
+  margin: 5px 0 0;
+  color: #c8a97e;
 }
 
-/* Section */
+/* Section title */
 .section-title {
   text-align: center;
   margin-top: 30px;
@@ -94,7 +89,7 @@ body {
 }
 
 .float button {
-  padding: 12px;
+  padding: 12px 20px;
   border: none;
   border-radius: 50px;
   cursor: pointer;
@@ -107,64 +102,55 @@ body {
   color: white;
 }
 
-/* Map */
+/* Map button */
 .mapbtn {
   background: #c8a97e;
+  color: black;
 }
 </style>
 
 <script>
-let lang = "en";
-
+// Données des boissons (ajoute le champ img pour chaque boisson)
 const coffee = [
-  {en:"Espresso", la:"Espresso", price:"35k"},
-  {en:"Americano", la:"Americano", price:"30k"},
-  {en:"Cappuccino", la:"Cappuccino", price:"35k"},
-  {en:"Latte", la:"Latte", price:"35k"},
-  {en:"Mocha", la:"Mocha", price:"40k"},
-  {en:"Vanila latte", la:"Vanila latte", price:"40k"},
-  {en:"Caramel latte", la:"Caramel latte", price:"45k"},
-  {en:"Orange coffee", la:"Orange coffee", price:"45k"},
-  {en:"Coconut coffee", la:"Coconut coffee", price:"45k"}
+  {name:"Espresso", price:"35₭", img:"images/espresso.jpg"},
+  {name:"Americano", price:"30₭", img:"images/americano.jpg"},
+  {name:"Cappuccino", price:"35₭", img:"images/cappuccino.jpg"},
+  {name:"Latte", price:"35₭", img:"images/latte.jpg"},
+  {name:"Mocha", price:"40₭", img:"images/mocha.jpg"},
+  {name:"Vanilla Latte", price:"40₭", img:"images/vanilla_latte.jpg"},
+  {name:"Caramel Latte", price:"45₭", img:"images/caramel_latte.jpg"},
+  {name:"Orange Coffee", price:"45₭", img:"images/orange_coffee.jpg"},
+  {name:"Coconut Coffee", price:"45₭", img:"images/coconut_coffee.jpg"}
 ];
 
 const noncoffee = [
-  {en:"Matcha coconut", la:"Matcha coconut", price:"50k"},
-  {en:"Matcha Latte", la:"Matcha Latte", price:"45k"},
-  {en:"Strawberry milk", la:"Strawberry milk", price:"35k"},
-  {en:"Cocoa strawberry", la:"Cocoa strawberry", price:"45k"},
-  {en:"Cocoalate", la:"Cocoalate", price:"35k"},
-  {en:"Matcha Strawberry", la:"Matcha Strawberry", price:"50k"},
-  {en:"Green tea", la:"Green tea", price:"35k"},
-  {en:"Thai milk tea", la:"Thai milk tea", price:"35k"},
-  {en:"Cocoa coconut", la:"Cocoa coconut", price:"45k"}
+  {name:"Matcha Coconut", price:"50₭", img:"images/matcha_coconut.jpg"},
+  {name:"Matcha Latte", price:"45₭", img:"images/matcha_latte.jpg"},
+  {name:"Strawberry Milk", price:"35₭", img:"images/strawberry_milk.jpg"},
+  {name:"Cocoa Strawberry", price:"45₭", img:"images/cocoa_strawberry.jpg"},
+  {name:"Cocoa Latte", price:"35₭", img:"images/cocoa_latte.jpg"},
+  {name:"Matcha Strawberry", price:"50₭", img:"images/matcha_strawberry.jpg"},
+  {name:"Green Tea", price:"35₭", img:"images/green_tea.jpg"},
+  {name:"Thai Milk Tea", price:"35₭", img:"images/thai_milk_tea.jpg"},
+  {name:"Cocoa Coconut", price:"45₭", img:"images/cocoa_coconut.jpg"}
 ];
 
-function setLang(l){
-  lang = l;
-  render();
-}
-
+// Ouvrir WhatsApp pour passer commande
 function order(name){
-  let text = lang === "la"
-    ? "ຂ້ອຍຢາກສັ່ງ " + name
-    : "Hello, I would like to order " + name;
-
-  window.open("https://wa.me/8562092747227?text=" + encodeURIComponent(text));
+  const text = "Hello, I would like to order " + name;
+  window.open("https://wa.me/8562092747227?text=" + encodeURIComponent(text), "_blank");
 }
 
+// Afficher les boissons
 function renderCategory(list, containerId){
   const container = document.getElementById(containerId);
   container.innerHTML = "";
-
   list.forEach(item => {
-    const name = lang === "la" ? item.la : item.en;
-
     container.innerHTML += `
-      <div class="card" onclick="order('${name}')">
-        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=400&q=80">
+      <div class="card" onclick="order('${item.name}')">
+        <img src="${item.img}" alt="${item.name}">
         <div class="card-content">
-          <h3>${name}</h3>
+          <h3>${item.name}</h3>
           <p class="price">${item.price}</p>
         </div>
       </div>
@@ -177,19 +163,13 @@ function render(){
   renderCategory(noncoffee, "noncoffee");
 }
 </script>
-
 </head>
 
 <body onload="render()">
 
 <div class="header">
   <h1>LIFE COFFEE</h1>
-  <p style="color:#c8a97e;">SLOWBAR</p>
-</div>
-
-<div class="lang">
-  <button onclick="setLang('en')">English</button>
-  <button onclick="setLang('la')">Lao</button>
+  <p>SLOWBAR</p>
 </div>
 
 <div class="section-title">COFFEE</div>
@@ -219,17 +199,12 @@ function render(){
 
 <!-- FLOATING BUTTONS -->
 <div class="float">
-
-  <!-- WhatsApp -->
   <a href="https://wa.me/8562092747227" target="_blank">
     <button class="whatsapp">WhatsApp</button>
   </a>
-
-  <!-- Map -->
   <a href="https://www.google.com/maps?q=19.895000663346558,102.14216503795944" target="_blank">
     <button class="mapbtn">Map</button>
   </a>
-
 </div>
 
 </body>
