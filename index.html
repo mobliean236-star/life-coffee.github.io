@@ -4,188 +4,126 @@
 <meta charset="UTF-8">
 <title>Life Coffee</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
-body { 
+body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
-  text-align: center;
-  overflow-x: hidden;
-}
-
-/* Video background */
-#bg-video {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%; 
-  min-height: 100%;
-  z-index: -1;
-  object-fit: cover;
-  filter: brightness(0.6);
+  background: black;
+  color: white;
 }
 
 /* Header */
-header { 
-  background: rgba(62, 39, 35, 0.85); 
-  color: white; 
-  padding: 20px; 
-  font-size: 28px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  gap: 15px;
-  backdrop-filter: blur(5px);
+header {
+  text-align: center;
+  padding: 30px;
 }
 
-header img { 
-  width: 60px; 
-  height: 60px;
-  /* ❌ animation supprimée */
+header h1 {
+  letter-spacing: 5px;
 }
 
-/* Language buttons */
-.lang-btn {
-  margin: 10px;
-  padding: 10px 20px;
-  border: none;
+header p {
+  color: #c8a97e;
+}
+
+/* Container */
+.menu {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  padding: 40px;
+  flex-wrap: wrap;
+}
+
+/* Category */
+.category {
+  width: 300px;
+}
+
+.category h2 {
+  border-bottom: 1px solid #c8a97e;
+  padding-bottom: 10px;
+  letter-spacing: 3px;
+}
+
+/* Items */
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
   cursor: pointer;
-  border-radius: 10px;
-  background: #6d4c41;
-  color: white;
-  font-weight: bold;
-  transition: transform 0.3s, background 0.3s;
+  transition: 0.3s;
 }
 
-.lang-btn:hover { 
-  background: #4e342e; 
-  transform: scale(1.05);
-}
-
-/* Product container */
-.container { 
-  display: flex; 
-  flex-wrap: wrap; 
-  justify-content: center; 
-  padding: 30px; 
-  gap: 25px;
-}
-
-/* Product cards */
-.product {
-  background: rgba(255, 255, 255, 0.9);
-  margin: 15px;
-  padding: 20px;
-  width: 270px;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  transition: transform 0.4s, box-shadow 0.4s;
-}
-
-.product:hover {
-  transform: translateY(-15px) scale(1.03);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.35);
-}
-
-.product img {
-  width: 100%;
-  border-radius: 20px;
-  transition: transform 0.4s;
-}
-
-.product img:hover { transform: scale(1.07); }
-
-.price { font-size: 18px; margin: 10px 0; color: #3e2723; font-weight: bold; }
-
-button.buy {
-  background: #6d4c41;
-  color: white;
-  padding: 12px 15px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: transform 0.3s, background 0.3s;
-}
-
-button.buy:hover { 
-  background: #4e342e; 
-  transform: scale(1.05);
+.item:hover {
+  color: #c8a97e;
+  transform: translateX(5px);
 }
 
 /* Footer */
-footer { 
-  margin-top: 30px; 
-  padding: 20px; 
-  background: rgba(62, 39, 35, 0.85); 
-  color: white; 
-  font-weight: bold;
-  backdrop-filter: blur(5px);
+footer {
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #333;
+  margin-top: 30px;
 }
 </style>
-
-<script>
-function setLang(lang) {
-  if (lang === 'la') {
-    document.getElementById('title').innerText = "Life Coffee ☕";
-    document.getElementById('sub').innerText = "ກາເຟລາວ - ສົດ ແລະ ອົບອຸ່ນ";
-
-    document.getElementById('p1').innerText = "ກາເຟ Espresso";
-    document.getElementById('p2').innerText = "ກາເຟ Cappuccino";
-    document.getElementById('p3').innerText = "Matcha Latte";
-
-    document.getElementById('b1').innerText = "ສັ່ງຊື້";
-    document.getElementById('b2').innerText = "ສັ່ງຊື້";
-    document.getElementById('b3').innerText = "ສັ່ງຊື້";
-
-    document.getElementById('a1').href = "https://wa.me/8562092747227?text=ສະບາຍດີ%20ຂ້ອຍຢາກສັ່ງ%20Espresso";
-    document.getElementById('a2').href = "https://wa.me/8562092747227?text=ສະບາຍດີ%20ຂ້ອຍຢາກສັ່ງ%20Cappuccino";
-    document.getElementById('a3').href = "https://wa.me/8562092747227?text=ສະບາຍດີ%20ຂ້ອຍຢາກສັ່ງ%20Matcha%20Latte";
-  } else {
-    document.getElementById('title').innerText = "Life Coffee ☕";
-    document.getElementById('sub').innerText = "Fresh Coffee in Laos 🇱🇦";
-
-    document.getElementById('p1').innerText = "Espresso";
-    document.getElementById('p2').innerText = "Cappuccino";
-    document.getElementById('p3').innerText = "Matcha Latte";
-
-    document.getElementById('b1').innerText = "Order";
-    document.getElementById('b2').innerText = "Order";
-    document.getElementById('b3').innerText = "Order";
-
-    document.getElementById('a1').href = "https://wa.me/8562092747227?text=Hello%2C%20I%20would%20like%20to%20order%20an%20Espresso";
-    document.getElementById('a2').href = "https://wa.me/8562092747227?text=Hello%2C%20I%20would%20like%20to%20order%20a%20Cappuccino";
-    document.getElementById('a3').href = "https://wa.me/8562092747227?text=Hello%2C%20I%20would%20like%20to%20order%20a%20Matcha%20Latte";
-  }
-}
-</script>
 
 </head>
 
 <body>
 
-<video autoplay muted loop id="bg-video">
-  <source src="https://cdn.pixabay.com/vimeo/617785671/coffee-1024.mp4?width=1280&hash=a5cabc78f1" type="video/mp4">
-</video>
-
 <header>
-  <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=60&q=80">
-  <span id="title">Life Coffee ☕</span>
+  <h1>LIFECOFFEE</h1>
+  <p>SLOWBAR</p>
 </header>
 
-<p id="sub" style="color:white; text-shadow: 1px 1px 5px black;">Fresh Coffee in Laos 🇱🇦</p>
+<div class="menu">
 
-<button class="lang-btn" onclick="setLang('la')">🇱🇦 Lao</button>
-<button class="lang-btn" onclick="setLang('en')">🇬🇧 English</button>
+  <!-- COFFEE -->
+  <div class="category">
+    <h2>COFFEE</h2>
 
-<div class="container">
-  <!-- tes produits restent pareil -->
+    <div class="item"><span>Espresso</span><span>35k</span></div>
+    <div class="item"><span>Americano</span><span>30k</span></div>
+    <div class="item"><span>Cappuccino</span><span>35k</span></div>
+    <div class="item"><span>Latte</span><span>35k</span></div>
+    <div class="item"><span>Mocha</span><span>40k</span></div>
+    <div class="item"><span>Vanila latte</span><span>40k</span></div>
+    <div class="item"><span>Caramel latte</span><span>45k</span></div>
+    <div class="item"><span>Orange coffee</span><span>45k</span></div>
+    <div class="item"><span>Coconut coffee</span><span>45k</span></div>
+
+  </div>
+
+  <!-- NON COFFEE -->
+  <div class="category">
+    <h2>NON COFFEE</h2>
+
+    <div class="item"><span>Matcha coconut</span><span>50k</span></div>
+    <div class="item"><span>Matcha Latte</span><span>45k</span></div>
+    <div class="item"><span>Strawberry milk</span><span>35k</span></div>
+    <div class="item"><span>Cocoa strawberry</span><span>45k</span></div>
+    <div class="item"><span>Cocoalate</span><span>35k</span></div>
+    <div class="item"><span>Matcha Strawberry</span><span>50k</span></div>
+    <div class="item"><span>Green tea</span><span>35k</span></div>
+    <div class="item"><span>Thai milk tea</span><span>35k</span></div>
+    <div class="item"><span>Cocoa coconut</span><span>45k</span></div>
+
+  </div>
+
 </div>
 
 <footer>
-📲 Commande WhatsApp : 020 9274 7227
+📲 Order on WhatsApp: 020 9274 7227
 </footer>
 
 </body>
 </html>
+  
+
+
+
+
