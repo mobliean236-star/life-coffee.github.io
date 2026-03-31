@@ -3,297 +3,250 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Life Coffee - SLOWBAR</title>
+<title>Life Coffee</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
-/* GLOBAL */
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   background: #000;
   color: #fff;
-  overflow-x: hidden;
 }
 
 /* HEADER */
 .header {
-  position: relative;
   text-align: center;
-  padding: 60px 20px;
-  background: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-  color: white;
-  overflow: hidden;
+  padding: 70px 20px;
+  background: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1400&q=80') center/cover;
+  position: relative;
 }
 
 .header::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.6);
 }
 
 .header h1 {
-  font-size: 48px;
-  font-weight: 600;
+  position: relative;
+  font-size: 50px;
   margin: 0;
-  background: linear-gradient(90deg, #c8a97e, #fff);
+  background: linear-gradient(90deg,#c8a97e,#fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  z-index: 1;
-  position: relative;
-  animation: fadeInUp 1s ease forwards;
 }
 
 .header p {
-  margin-top: 10px;
-  font-size: 24px;
-  font-weight: 300;
-  color: #c8a97e;
-  z-index: 1;
   position: relative;
-  animation: fadeInUp 1.3s ease forwards;
+  color: #c8a97e;
+  font-size: 22px;
 }
 
-@keyframes fadeInUp {
-  0% {opacity:0; transform: translateY(20px);}
-  100% {opacity:1; transform: translateY(0);}
-}
-
-/* SECTION TITLES */
+/* TITLES */
 .section-title {
   text-align: center;
   margin: 40px 0 20px;
   font-size: 26px;
-  border-bottom: 2px solid #444;
-  padding-bottom: 10px;
-  letter-spacing: 1px;
+  border-bottom: 2px solid #333;
 }
 
-/* GRID CARDS */
+/* GRID */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px;
-  padding: 0 20px 40px;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap: 20px;
+  padding: 20px;
 }
 
+/* CARD */
 .card {
   background: #111;
   border-radius: 15px;
   overflow: hidden;
-  cursor: pointer;
   position: relative;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px #c8a97e;
 }
 
 .card img {
   width: 100%;
-  height: 180px;
+  height: 160px;
   object-fit: cover;
-  transition: transform 0.3s;
-}
-
-.card:hover img {
-  transform: scale(1.1);
 }
 
 .card-content {
-  padding: 15px;
+  padding: 12px;
   text-align: center;
 }
 
-.card-content h3 {
-  margin: 10px 0 5px;
-  font-size: 20px;
-}
-
-.card-content p {
-  margin: 0;
+.price {
   color: #c8a97e;
-  font-weight: 600;
-  font-size: 18px;
+  font-weight: bold;
 }
 
-/* QUICK ORDER BAR */
-.quick-order {
+/* BUTTON ADD */
+.add-btn {
+  margin-top: 10px;
+  background: #c8a97e;
+  border: none;
+  padding: 10px;
+  border-radius: 30px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+}
+
+/* BEST SELLER */
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #c8a97e;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* CART */
+.cart {
   position: fixed;
-  bottom: 100px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #1a1a1a;
-  border-radius: 50px;
-  display: flex;
-  gap: 15px;
-  padding: 10px 20px;
-  box-shadow: 0 0 20px #c8a97e;
-  z-index: 100;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #111;
+  padding: 15px;
+  box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
 }
 
-.quick-order button {
+.cart button {
+  width: 100%;
+  padding: 15px;
+  background: #25D366;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 30px;
+}
+
+/* FLOAT */
+.float {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+}
+
+.mapbtn {
+  padding: 12px 20px;
   background: #c8a97e;
   border: none;
   border-radius: 50px;
-  padding: 12px 18px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.2s;
 }
-
-.quick-order button:hover {
-  background: #fff;
-  color: #c8a97e;
-}
-
-/* FLOATING BUTTONS */
-.float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.float a button {
-  padding: 14px 20px;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.2s;
-}
-
-.whatsapp {background: #25D366; color: #fff;}
-.whatsapp:hover {background: #128C7E;}
-
-.mapbtn {background: #c8a97e; color: #000;}
-.mapbtn:hover {background: #fff; color: #c8a97e;}
-
-/* MAP IFRAME */
-.map-container {
-  padding: 20px;
-}
-
-.map-container iframe {
-  width: 100%;
-  height: 300px;
-  border: 0;
-  border-radius: 15px;
-}
-
-/* ANIMATIONS ON LOAD */
-@keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
-}
-
-.card {
-  opacity: 0;
-  animation: fadeIn 0.5s ease forwards;
-}
-
-.card:nth-child(1) {animation-delay: 0.1s;}
-.card:nth-child(2) {animation-delay: 0.2s;}
-.card:nth-child(3) {animation-delay: 0.3s;}
-.card:nth-child(4) {animation-delay: 0.4s;}
-.card:nth-child(5) {animation-delay: 0.5s;}
-.card:nth-child(6) {animation-delay: 0.6s;}
 </style>
 
 <script>
-// Données boissons avec image (à remplacer par tes photos)
+let cart = [];
+
 const coffee = [
-  {name:"Espresso", price:"35₭", img:"images/espresso.jpg"},
-  {name:"Americano", price:"30₭", img:"images/americano.jpg"},
-  {name:"Cappuccino", price:"35₭", img:"images/cappuccino.jpg"},
-  {name:"Latte", price:"35₭", img:"images/latte.jpg"},
-  {name:"Mocha", price:"40₭", img:"images/mocha.jpg"}
+  {name:"Espresso", price:"35k"},
+  {name:"Americano", price:"30k"},
+  {name:"Cappuccino", price:"35k"},
+  {name:"Latte", price:"35k"},
+  {name:"Mocha", price:"40k"},
+  {name:"Vanilla Latte", price:"40k"},
+  {name:"Caramel Latte", price:"45k"},
+  {name:"Orange Coffee", price:"45k", best:true},
+  {name:"Coconut Coffee", price:"45k", best:true}
 ];
 
 const noncoffee = [
-  {name:"Matcha Coconut", price:"50₭", img:"images/matcha_coconut.jpg"},
-  {name:"Strawberry Milk", price:"35₭", img:"images/strawberry_milk.jpg"},
-  {name:"Cocoa Latte", price:"35₭", img:"images/cocoa_latte.jpg"},
-  {name:"Thai Milk Tea", price:"35₭", img:"images/thai_milk_tea.jpg"}
+  {name:"Matcha Coconut", price:"50k"},
+  {name:"Matcha Latte", price:"45k"},
+  {name:"Strawberry Milk", price:"35k"},
+  {name:"Cocoa Strawberry", price:"45k"},
+  {name:"Cocoa Latte", price:"35k"},
+  {name:"Matcha Strawberry", price:"50k"},
+  {name:"Green Tea", price:"35k"},
+  {name:"Thai Milk Tea", price:"35k"},
+  {name:"Cocoa Coconut", price:"45k"}
 ];
 
-// Commande rapide WhatsApp
-function order(name){
-  const text = "Hello, I would like to order " + name;
-  window.open("https://wa.me/8562092747227?text=" + encodeURIComponent(text), "_blank");
+// ADD TO CART
+function addToCart(name){
+  cart.push(name);
+  updateCart();
 }
 
-// Render cartes
-function renderCategory(list, containerId){
-  const container = document.getElementById(containerId);
-  container.innerHTML = "";
-  list.forEach(item => {
-    container.innerHTML += `
-      <div class="card" onclick="order('${item.name}')">
-        <img src="${item.img}" alt="${item.name}">
+// UPDATE CART BUTTON
+function updateCart(){
+  document.getElementById("cart-count").innerText = cart.length;
+}
+
+// SEND ORDER
+function sendOrder(){
+  if(cart.length === 0){
+    alert("Cart is empty");
+    return;
+  }
+
+  let message = "Hello, I would like to order:\n";
+  cart.forEach(item => message += "- " + item + "\n");
+
+  window.open("https://wa.me/8562092747227?text=" + encodeURIComponent(message));
+}
+
+// RENDER
+function renderCategory(list,id){
+  const container = document.getElementById(id);
+  container.innerHTML="";
+  list.forEach(item=>{
+    container.innerHTML+=`
+      <div class="card">
+        ${item.best ? '<div class="badge">🔥 BEST SELLER</div>' : ''}
+        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
         <div class="card-content">
           <h3>${item.name}</h3>
-          <p>${item.price}</p>
+          <p class="price">${item.price}</p>
+          <button class="add-btn" onclick="addToCart('${item.name}')">ADD TO ORDER</button>
         </div>
       </div>
     `;
   });
 }
 
-// Quick Order bar
-function renderQuickOrder(list){
-  const container = document.getElementById("quick-order");
-  container.innerHTML = "";
-  list.slice(0,3).forEach(item => {
-    container.innerHTML += `<button onclick="order('${item.name}')">${item.name}</button>`;
-  });
-}
-
-// Init
-function render(){
-  renderCategory(coffee, "coffee");
-  renderCategory(noncoffee, "noncoffee");
-  renderQuickOrder([...coffee,...noncoffee]);
+function init(){
+  renderCategory(coffee,"coffee");
+  renderCategory(noncoffee,"noncoffee");
 }
 </script>
 </head>
 
-<body onload="render()">
+<body onload="init()">
 
-<!-- HEADER -->
 <div class="header">
   <h1>LIFE COFFEE</h1>
   <p>SLOWBAR</p>
 </div>
 
-<!-- COFFEE -->
 <div class="section-title">COFFEE</div>
 <div id="coffee" class="grid"></div>
 
-<!-- NON COFFEE -->
 <div class="section-title">NON COFFEE</div>
 <div id="noncoffee" class="grid"></div>
 
-<!-- MAP -->
-<div class="map-container">
-  <h2 style="color:#c8a97e; text-align:center;">📍 Location</h2>
-  <iframe src="https://www.google.com/maps?q=19.895000663346558,102.14216503795944&output=embed"></iframe>
+<!-- CART -->
+<div class="cart">
+  <button onclick="sendOrder()">
+    🛒 Order on WhatsApp (<span id="cart-count">0</span>)
+  </button>
 </div>
 
-<!-- QUICK ORDER BAR -->
-<div id="quick-order" class="quick-order"></div>
-
-<!-- FLOATING BUTTONS -->
+<!-- MAP -->
 <div class="float">
-  <a href="https://wa.me/8562092747227" target="_blank"><button class="whatsapp">WhatsApp</button></a>
-  <a href="https://www.google.com/maps?q=19.895000663346558,102.14216503795944" target="_blank"><button class="mapbtn">Map</button></a>
+  <a href="https://www.google.com/maps?q=19.895000663346558,102.14216503795944">
+    <button class="mapbtn">Map</button>
+  </a>
 </div>
 
 </body>
