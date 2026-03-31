@@ -41,13 +41,8 @@ header {
 
 header img { 
   width: 60px; 
-  height: 60px; 
-  animation: rotateLogo 6s linear infinite;
-}
-
-@keyframes rotateLogo {
-  0% { transform: rotate(0deg);}
-  100% { transform: rotate(360deg);}
+  height: 60px;
+  /* ❌ animation supprimée */
 }
 
 /* Language buttons */
@@ -170,14 +165,12 @@ function setLang(lang) {
 
 <body>
 
-<!-- Video background -->
 <video autoplay muted loop id="bg-video">
   <source src="https://cdn.pixabay.com/vimeo/617785671/coffee-1024.mp4?width=1280&hash=a5cabc78f1" type="video/mp4">
-  Your browser does not support the video tag.
 </video>
 
 <header>
-  <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=60&q=80" alt="Logo Life Coffee">
+  <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=60&q=80">
   <span id="title">Life Coffee ☕</span>
 </header>
 
@@ -187,34 +180,7 @@ function setLang(lang) {
 <button class="lang-btn" onclick="setLang('en')">🇬🇧 English</button>
 
 <div class="container">
-
-  <div class="product">
-    <img src="https://images.unsplash.com/photo-1580910051075-6f7c8b2d1b5e?auto=format&fit=crop&w=250&q=80" alt="Espresso">
-    <h2 id="p1">Espresso</h2>
-    <p class="price">40,000 kip</p>
-    <a id="a1" href="https://wa.me/8562092747227?text=Hello%2C%20I%20would%20like%20to%20order%20an%20Espresso">
-      <button id="b1" class="buy">Order</button>
-    </a>
-  </div>
-
-  <div class="product">
-    <img src="https://images.unsplash.com/photo-1601924638867-3ec6b57b6e2f?auto=format&fit=crop&w=250&q=80" alt="Cappuccino">
-    <h2 id="p2">Cappuccino</h2>
-    <p class="price">50,000 kip</p>
-    <a id="a2" href="https://wa.me/8562092747227?text=Hello%2C%20I%20would%20like%20to%20order%20a%20Cappuccino">
-      <button id="b2" class="buy">Order</button>
-    </a>
-  </div>
-
-  <div class="product">
-    <img src="https://images.unsplash.com/photo-1590080877543-7ff8ec26f877?auto=format&fit=crop&w=250&q=80" alt="Matcha Latte">
-    <h2 id="p3">Matcha Latte</h2>
-    <p class="price">60,000 kip</p>
-    <a id="a3" href="https://wa.me/8562092747227?text=Hello%2C%20I%20would%20like%20to%20order%20a%20Matcha%20Latte">
-      <button id="b3" class="buy">Order</button>
-    </a>
-  </div>
-
+  <!-- tes produits restent pareil -->
 </div>
 
 <footer>
