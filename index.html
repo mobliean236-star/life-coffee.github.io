@@ -18,7 +18,7 @@ body {
 /* HEADER */
 .header {
   text-align:center;
-  padding:60px 20px;
+  padding:80px 20px;
   background:url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
   position:relative;
 }
@@ -26,20 +26,23 @@ body {
   content:"";
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,0.5);
+  background:rgba(0,0,0,0.6);
 }
 .header h1 {
   position:relative;
-  font-size:45px;
-  background:linear-gradient(90deg,#c8a97e,#fff);
+  font-size:60px;
+  font-weight:900;
+  background:linear-gradient(90deg,#FFD700,#FFA500);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+  text-shadow: 2px 2px 8px #000;
 }
 .header p {
   position:relative;
-  color:#c8a97e;
+  color:#FFD700;
   margin-top:10px;
   font-weight:bold;
+  font-size:22px;
 }
 
 /* SECTION TITLE */
@@ -71,18 +74,15 @@ body {
   transform:scale(1.05);
   box-shadow:0 0 20px #c8a97e;
 }
-
 .card img {
   width:100%;
-  height:160px;
+  height:180px;
   object-fit:cover;
 }
-
 .card-content {
   padding:10px;
   text-align:center;
 }
-
 .price {
   color:#c8a97e;
   font-weight:bold;
@@ -98,6 +98,12 @@ body {
   padding:5px 10px;
   border-radius:20px;
   font-size:12px;
+  animation: pulse 1.2s infinite;
+}
+@keyframes pulse {
+  0% {transform:scale(1);}
+  50% {transform:scale(1.1);}
+  100% {transform:scale(1);}
 }
 
 /* CONTROLS */
@@ -108,7 +114,6 @@ body {
   gap:10px;
   margin-top:10px;
 }
-
 .controls button {
   background:#c8a97e;
   border:none;
@@ -116,135 +121,92 @@ body {
   height:30px;
   border-radius:50%;
   font-weight:bold;
+  cursor:pointer;
+  transition:0.2s;
 }
-
+.controls button.adding {
+  animation: flash 0.3s;
+}
+@keyframes flash {
+  0% {transform:scale(1);}
+  50% {transform:scale(1.4);}
+  100% {transform:scale(1);}
+}
 .qty {
   min-width:20px;
   text-align:center;
 }
 
-/* CART */
-.cart {
+/* MINI CART FLOAT */
+.mini-cart {
   position:fixed;
-  bottom:0;
-  width:100%;
+  top:20px;
+  right:20px;
   background:#111;
-  padding:15px;
-  border-top:2px solid #c8a97e;
+  border:2px solid #c8a97e;
+  padding:10px 20px;
+  border-radius:30px;
+  cursor:pointer;
+  z-index:999;
   display:flex;
-  justify-content:center;
+  align-items:center;
+  gap:10px;
+}
+.mini-cart span {
+  font-weight:bold;
+  color:#c8a97e;
 }
 
-.cart button {
-  width:95%;
-  padding:15px;
+/* CART OVERLAY */
+.cart-overlay {
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.8);
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
+.cart-overlay .cart-content {
+  background:#111;
+  padding:20px;
+  border-radius:20px;
+  width:90%;
+  max-width:400px;
+}
+.cart-overlay h2 {
+  text-align:center;
+  margin-bottom:10px;
+  color:#c8a97e;
+}
+.cart-overlay ul {
+  list-style:none;
+  padding:0;
+  max-height:300px;
+  overflow-y:auto;
+}
+.cart-overlay li {
+  display:flex;
+  justify-content:space-between;
+  padding:5px 0;
+  border-bottom:1px solid #444;
+}
+.cart-overlay button {
+  margin-top:10px;
+  width:100%;
+  padding:10px;
   background:#25D366;
   border:none;
-  border-radius:30px;
+  border-radius:20px;
   font-weight:bold;
+  cursor:pointer;
   color:white;
-  font-size:18px;
 }
 </style>
-
-<script>
-let cart = {};
-
-const coffee = [
-  {name:"Espresso", price:35000, img:"https://images.unsplash.com/photo-1617196030787-556c92a7e8a2"},
-  {name:"Americano", price:30000, img:"https://images.unsplash.com/photo-1605475125393-14edcf6c39f8"},
-  {name:"Cappuccino", price:35000, img:"https://images.unsplash.com/photo-1600718374585-5be83f5ef37f"},
-  {name:"Latte", price:35000, img:"https://images.unsplash.com/photo-1568931913875-fc68fdd2f4a5"},
-  {name:"Mocha", price:40000, img:"https://images.unsplash.com/photo-1617196030787-556c92a7e8a2"},
-  {name:"Vanilla Latte", price:40000, img:"https://images.unsplash.com/photo-1622010082151-7fda5f77d8f5"},
-  {name:"Caramel Latte", price:45000, img:"https://images.unsplash.com/photo-1617196030787-556c92a7e8a2"},
-  {name:"Orange Coffee", price:45000, best:true, img:"https://images.unsplash.com/photo-1605475125393-14edcf6c39f8"},
-  {name:"Coconut Coffee", price:45000, best:true, img:"https://images.unsplash.com/photo-1568931913875-fc68fdd2f4a5"}
-];
-
-const noncoffee = [
-  {name:"Matcha Coconut", price:50000, img:"https://images.unsplash.com/photo-1605475125393-14edcf6c39f8"},
-  {name:"Matcha Latte", price:45000, img:"https://images.unsplash.com/photo-1622010082151-7fda5f77d8f5"},
-  {name:"Strawberry Milk", price:35000, img:"https://images.unsplash.com/photo-1617196030787-556c92a7e8a2"},
-  {name:"Cocoa Strawberry", price:45000, img:"https://images.unsplash.com/photo-1605475125393-14edcf6c39f8"},
-  {name:"Cocoa Latte", price:35000, img:"https://images.unsplash.com/photo-1568931913875-fc68fdd2f4a5"},
-  {name:"Matcha Strawberry", price:50000, img:"https://images.unsplash.com/photo-1622010082151-7fda5f77d8f5"},
-  {name:"Green Tea", price:35000, img:"https://images.unsplash.com/photo-1617196030787-556c92a7e8a2"},
-  {name:"Thai Milk Tea", price:35000, img:"https://images.unsplash.com/photo-1605475125393-14edcf6c39f8"},
-  {name:"Cocoa Coconut", price:45000, img:"https://images.unsplash.com/photo-1568931913875-fc68fdd2f4a5"}
-];
-
-function add(name){
-  cart[name]=(cart[name]||0)+1;
-  update();
-}
-
-function remove(name){
-  if(cart[name]){
-    cart[name]--;
-    if(cart[name]<=0) delete cart[name];
-  }
-  update();
-}
-
-function update(){
-  let total=0;
-  [...coffee,...noncoffee].forEach(item=>{
-    let qty=cart[item.name]||0;
-    const el=document.getElementById("qty-"+item.name);
-    if(el) el.innerText=qty;
-    total+=qty*item.price;
-  });
-  document.getElementById("total").innerText =
-    "🛒 Order ("+total.toLocaleString()+"₭)";
-}
-
-function send(){
-  if(Object.keys(cart).length===0){
-    alert("Please add some drinks first!");
-    return;
-  }
-  let message="Order:\n";
-  let total=0;
-  for(let item in cart){
-    let qty=cart[item];
-    let price=[...coffee,...noncoffee].find(m=>m.name===item).price;
-    total+=price*qty;
-    message+=`${item} x${qty}\n`;
-  }
-  message+="Total: "+total.toLocaleString()+"₭";
-  window.open("https://wa.me/8562092747227?text="+encodeURIComponent(message));
-}
-
-function renderSection(list, containerId){
-  const container=document.getElementById(containerId);
-  list.forEach(item=>{
-    container.innerHTML+=`
-      <div class="card">
-        ${item.best ? '<div class="badge">🔥 BEST SELLER</div>' : ''}
-        <img src="${item.img}?auto=format&fit=crop&w=400&q=80">
-        <div class="card-content">
-          <h3>${item.name}</h3>
-          <p class="price">${item.price.toLocaleString()}₭</p>
-          <div class="controls">
-            <button onclick="remove('${item.name}')">-</button>
-            <div id="qty-${item.name}" class="qty">0</div>
-            <button onclick="add('${item.name}')">+</button>
-          </div>
-        </div>
-      </div>
-    `;
-  });
-}
-
-function render(){
-  renderSection(coffee,"coffee");
-  renderSection(noncoffee,"noncoffee");
-}
-</script>
 </head>
 
-<body onload="render()">
+<body>
 
 <div class="header">
   <h1>LIFE COFFEE</h1>
@@ -257,9 +219,112 @@ function render(){
 <div class="section-title">NON COFFEE</div>
 <div id="noncoffee" class="grid"></div>
 
-<div class="cart">
-  <button id="total" onclick="send()">🛒 Order (0₭)</button>
+<!-- MINI CART -->
+<div class="mini-cart" onclick="toggleCart()">
+  🛒 <span id="mini-count">0</span> | <span id="mini-total">0₭</span>
 </div>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay">
+  <div class="cart-content">
+    <h2>Votre Panier</h2>
+    <ul id="cartItems"></ul>
+    <button onclick="send()">Commander sur WhatsApp</button>
+  </div>
+</div>
+
+<script>
+let cart={};
+
+const coffee=[
+{name:"Espresso", price:35000, img:"https://images.unsplash.com/photo-1584270354949-fc7e4ff3d2c1?auto=format&fit=crop&w=400&q=80"},
+{name:"Americano", price:30000, img:"https://images.unsplash.com/photo-1605475125393-14edcf6c39f8?auto=format&fit=crop&w=400&q=80"},
+{name:"Cappuccino", price:35000, img:"https://images.unsplash.com/photo-1617196030787-556c92a7e8a2?auto=format&fit=crop&w=400&q=80"},
+{name:"Latte", price:35000, img:"https://images.unsplash.com/photo-1568931913875-fc68fdd2f4a5?auto=format&fit=crop&w=400&q=80"},
+{name:"Mocha", price:40000, img:"https://images.unsplash.com/photo-1584270354949-fc7e4ff3d2c1?auto=format&fit=crop&w=400&q=80"},
+{name:"Vanilla Latte", price:40000, img:"https://images.unsplash.com/photo-1622010082151-7fda5f77d8f5?auto=format&fit=crop&w=400&q=80"},
+{name:"Caramel Latte", price:45000, img:"https://images.unsplash.com/photo-1617196030787-556c92a7e8a2?auto=format&fit=crop&w=400&q=80"},
+{name:"Orange Coffee", price:45000, best:true, img:"https://images.unsplash.com/photo-1605475125393-14edcf6c39f8?auto=format&fit=crop&w=400&q=80"},
+{name:"Coconut Coffee", price:45000, best:true, img:"https://images.unsplash.com/photo-1568931913875-fc68fdd2f4a5?auto=format&fit=crop&w=400&q=80"}
+];
+
+const noncoffee=[
+{name:"Matcha Coconut", price:50000, img:"https://images.unsplash.com/photo-1605475125393-14edcf6c39f8?auto=format&fit=crop&w=400&q=80"},
+{name:"Matcha Latte", price:45000, img:"https://images.unsplash.com/photo-1622010082151-7fda5f77d8f5?auto=format&fit=crop&w=400&q=80"},
+{name:"Strawberry Milk", price:35000, img:"https://images.unsplash.com/photo-1617196030787-556c92a7e8a2?auto=format&fit=crop&w=400&q=80"},
+{name:"Cocoa Strawberry", price:45000, img:"https://images.unsplash.com/photo-1605475125393-14edcf6c39f8?auto=format&fit=crop&w=400&q=80"},
+{name:"Cocoa Latte", price:35000, img:"https://images.unsplash.com/photo-1568931913875-fc68fdd2f4a5?auto=format&fit=crop&w=400&q=80"},
+{name:"Matcha Strawberry", price:50000, img:"https://images.unsplash.com/photo-1622010082151-7fda5f77d8f5?auto=format&fit=crop&w=400&q=80"},
+{name:"Green Tea", price:35000, img:"https://images.unsplash.com/photo-1617196030787-556c92a7e8a2?auto=format&fit=crop&w=400&q=80"},
+{name:"Thai Milk Tea", price:35000, img:"https://images.unsplash.com/photo-1605475125393-14edcf6c39f8?auto=format&fit=crop&w=400&q=80"},
+{name:"Cocoa Coconut", price:45000, img:"https://images.unsplash.com/photo-1568931913875-fc68fdd2f4a5?auto=format&fit=crop&w=400&q=80"}
+];
+
+function add(name,btn){
+  cart[name]=(cart[name]||0)+1;
+  btn.classList.add('adding');
+  setTimeout(()=>btn.classList.remove('adding'),300);
+  updateMiniCart();
+  renderCartOverlay();
+}
+function remove(name){if(cart[name]){cart[name]--;if(cart[name]<=0)delete cart[name];}updateMiniCart();renderCartOverlay();}
+function updateMiniCart(){
+  let totalQty=0,totalPrice=0;
+  [...coffee,...noncoffee].forEach(item=>{let qty=cart[item.name]||0;totalQty+=qty;totalPrice+=qty*item.price;});
+  document.getElementById('mini-count').innerText=totalQty;
+  document.getElementById('mini-total').innerText=totalPrice.toLocaleString()+"₭";
+}
+function toggleCart(){
+  const overlay=document.getElementById('cartOverlay');
+  overlay.style.display=overlay.style.display==='flex'?'none':'flex';
+}
+function renderCartOverlay(){
+  const ul=document.getElementById('cartItems');
+  ul.innerHTML='';
+  for(let item in cart){
+    let qty=cart[item];
+    let price=[...coffee,...noncoffee].find(m=>m.name===item).price;
+    ul.innerHTML+=`<li>${item} x${qty} - ${(qty*price).toLocaleString()}₭</li>`;
+  }
+}
+function send(){
+  if(Object.keys(cart).length===0){alert("Please add drinks!"); return;}
+  let msg="Order:\n";
+  let total=0;
+  for(let item in cart){
+    let qty=cart[item];
+    let price=[...coffee,...noncoffee].find(m=>m.name===item).price;
+    total+=price*qty;
+    msg+=`${item} x${qty}\n`;
+  }
+  msg+="Total: "+total.toLocaleString()+"₭";
+  window.open("https://wa.me/8562092747227?text="+encodeURIComponent(msg));
+}
+
+function renderSection(list, containerId){
+  const container=document.getElementById(containerId);
+  list.forEach(item=>{
+    container.innerHTML+=`
+      <div class="card">
+        ${item.best?'<div class="badge">🔥 BEST SELLER</div>':''}
+        <img src="${item.img}">
+        <div class="card-content">
+          <h3>${item.name}</h3>
+          <p class="price">${item.price.toLocaleString()}₭</p>
+          <div class="controls">
+            <button onclick="remove('${item.name}')">-</button>
+            <div id="qty-${item.name}" class="qty">${cart[item.name]||0}</div>
+            <button onclick="add('${item.name}',this)">+</button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function render(){renderSection(coffee,'coffee');renderSection(noncoffee,'noncoffee');}
+render();
+</script>
 
 </body>
 </html>
