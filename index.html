@@ -15,6 +15,7 @@ body {
   color:white;
 }
 
+/* HEADER */
 .header {
   text-align:center;
   padding:80px 20px;
@@ -32,7 +33,12 @@ body {
   font-size:60px;
   font-weight:900;
   color: #fff;
-  text-shadow:0 0 5px #000,0 0 10px #000,0 0 20px #000,0 0 40px #000,0 0 80px #000;
+  text-shadow:
+    0 0 5px #000,
+    0 0 10px #000,
+    0 0 20px #000,
+    0 0 40px #000,
+    0 0 80px #000;
 }
 .header p {
   position:relative;
@@ -43,6 +49,7 @@ body {
   text-shadow: 0 0 5px #000;
 }
 
+/* SECTION TITLE */
 .section-title {
   text-align:center;
   font-size:22px;
@@ -51,6 +58,7 @@ body {
   margin:30px 0 10px 0;
 }
 
+/* GRID */
 .grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -58,6 +66,7 @@ body {
   padding:0 20px 20px 20px;
 }
 
+/* CARD */
 .card {
   background:#111;
   border-radius:15px;
@@ -83,6 +92,7 @@ body {
   font-weight:bold;
 }
 
+/* BEST SELLER */
 .badge {
   position:absolute;
   top:10px;
@@ -100,6 +110,7 @@ body {
   100% {transform:scale(1);}
 }
 
+/* CONTROLS */
 .controls {
   display:flex;
   justify-content:center;
@@ -130,6 +141,7 @@ body {
   text-align:center;
 }
 
+/* MINI CART FLOAT */
 .mini-cart {
   position:fixed;
   top:20px;
@@ -149,6 +161,7 @@ body {
   color:#0ff;
 }
 
+/* CART OVERLAY */
 .cart-overlay {
   position:fixed;
   inset:0;
@@ -200,6 +213,7 @@ body {
   color:black;
 }
 
+/* FLOAT BUTTON ORDER DIRECT */
 .float-order {
   position:fixed;
   bottom:80px;
@@ -223,6 +237,7 @@ body {
   box-shadow:0 0 25px #25D366;
 }
 
+/* LOCATION */
 .location {
   text-align:center;
   margin:30px 0;
@@ -279,27 +294,27 @@ body {
 let cart={};
 
 const coffee=[
-{name:"Espresso", price:35000, img:"https://via.placeholder.com/400x300?text=Espresso"},
-{name:"Americano", price:30000, img:"https://via.placeholder.com/400x300?text=Americano"},
-{name:"Cappuccino", price:35000, img:"https://via.placeholder.com/400x300?text=Cappuccino"},
-{name:"Latte", price:35000, img:"https://via.placeholder.com/400x300?text=Latte"},
-{name:"Mocha", price:40000, img:"https://via.placeholder.com/400x300?text=Mocha"},
-{name:"Vanilla Latte", price:40000, img:"https://via.placeholder.com/400x300?text=Vanilla+Latte"},
-{name:"Caramel Latte", price:45000, img:"https://via.placeholder.com/400x300?text=Caramel+Latte"},
-{name:"Orange Coffee", price:45000, best:true, img:"https://via.placeholder.com/400x300?text=Orange+Coffee"},
-{name:"Coconut Coffee", price:45000, best:true, img:"https://via.placeholder.com/400x300?text=Coconut+Coffee"}
+{name:"Espresso", price:35000, img:"https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG"},
+{name:"Americano", price:30000, img:"https://upload.wikimedia.org/wikipedia/commons/8/88/Cup_of_coffee_with_milk.JPG"},
+{name:"Cappuccino", price:35000, img:"https://upload.wikimedia.org/wikipedia/commons/1/15/Cappuccino_in_a_cup.jpg"},
+{name:"Latte", price:35000, img:"https://upload.wikimedia.org/wikipedia/commons/f/f8/Latte_art_coffee.jpg"},
+{name:"Mocha", price:40000, img:"https://upload.wikimedia.org/wikipedia/commons/4/45/Mocha_coffee.jpg"},
+{name:"Vanilla Latte", price:40000, img:"https://upload.wikimedia.org/wikipedia/commons/5/5e/Vanilla_Latte.jpg"},
+{name:"Caramel Latte", price:45000, img:"https://upload.wikimedia.org/wikipedia/commons/3/30/Caramel_Latte.jpg"},
+{name:"Orange Coffee", price:45000, best:true, img:"https://upload.wikimedia.org/wikipedia/commons/2/2b/Orange_Coffee.jpg"},
+{name:"Coconut Coffee", price:45000, best:true, img:"https://upload.wikimedia.org/wikipedia/commons/1/17/Coconut_Coffee.jpg"}
 ];
 
 const noncoffee=[
-{name:"Matcha Coconut", price:50000, img:"https://via.placeholder.com/400x300?text=Matcha+Coconut"},
-{name:"Matcha Latte", price:45000, img:"https://via.placeholder.com/400x300?text=Matcha+Latte"},
-{name:"Strawberry Milk", price:35000, img:"https://via.placeholder.com/400x300?text=Strawberry+Milk"},
-{name:"Cocoa Strawberry", price:45000, img:"https://via.placeholder.com/400x300?text=Cocoa+Strawberry"},
-{name:"Cocoa Latte", price:35000, img:"https://via.placeholder.com/400x300?text=Cocoa+Latte"},
-{name:"Matcha Strawberry", price:50000, img:"https://via.placeholder.com/400x300?text=Matcha+Strawberry"},
-{name:"Green Tea", price:35000, img:"https://via.placeholder.com/400x300?text=Green+Tea"},
-{name:"Thai Milk Tea", price:35000, img:"https://via.placeholder.com/400x300?text=Thai+Milk+Tea"},
-{name:"Cocoa Coconut", price:45000, img:"https://via.placeholder.com/400x300?text=Cocoa+Coconut"}
+{name:"Matcha Coconut", price:50000, img:"https://upload.wikimedia.org/wikipedia/commons/4/45/Matcha_Coconut.jpg"},
+{name:"Matcha Latte", price:45000, img:"https://upload.wikimedia.org/wikipedia/commons/8/88/Matcha_Latte.jpg"},
+{name:"Strawberry Milk", price:35000, img:"https://upload.wikimedia.org/wikipedia/commons/1/15/Strawberry_Milk.jpg"},
+{name:"Cocoa Strawberry", price:45000, img:"https://upload.wikimedia.org/wikipedia/commons/f/f8/Cocoa_Strawberry.jpg"},
+{name:"Cocoa Latte", price:35000, img:"https://upload.wikimedia.org/wikipedia/commons/5/5e/Cocoa_Latte.jpg"},
+{name:"Matcha Strawberry", price:50000, img:"https://upload.wikimedia.org/wikipedia/commons/3/30/Matcha_Strawberry.jpg"},
+{name:"Green Tea", price:35000, img:"https://upload.wikimedia.org/wikipedia/commons/2/2b/Green_Tea.jpg"},
+{name:"Thai Milk Tea", price:35000, img:"https://upload.wikimedia.org/wikipedia/commons/1/17/Thai_Milk_Tea.jpg"},
+{name:"Cocoa Coconut", price:45000, img:"https://upload.wikimedia.org/wikipedia/commons/4/45/Cocoa_Coconut.jpg"}
 ];
 
 function add(name, btn){
