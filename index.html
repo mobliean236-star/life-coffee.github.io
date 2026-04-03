@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Life Coffee</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
-
 <style>
 body {
   margin:0;
@@ -18,16 +16,14 @@ body {
 /* HEADER */
 .header {
   position:relative;
-  height:60vh; /* réduit */
-  overflow:hidden;
+  height:90vh;
   display:flex;
   justify-content:center;
   align-items:center;
   text-align:center;
-  background:url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1400&q=80') no-repeat center center/cover;
+  background:url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
 }
 
-/* DARK OVERLAY */
 .overlay {
   position:absolute;
   inset:0;
@@ -35,18 +31,16 @@ body {
   z-index:1;
 }
 
-/* TEXT */
 .header-content {
   position:relative;
   z-index:2;
 }
 .header-content h1 {
-  font-size:50px;
+  font-size:70px;
   font-weight:900;
-  letter-spacing:2px;
 }
 .header-content p {
-  font-size:18px;
+  font-size:22px;
   opacity:0.9;
 }
 
@@ -56,7 +50,7 @@ body {
   font-size:24px;
   margin:40px 0 20px;
   letter-spacing:2px;
-  color:#6c7a7c; /* gris/vert */
+  color:#8fbc8f; /* vert gris */
 }
 
 /* GRID */
@@ -74,10 +68,11 @@ body {
   overflow:hidden;
   transition:0.3s;
   box-shadow:0 5px 15px rgba(0,0,0,0.5);
+  position:relative;
 }
 .card:hover {
   transform:translateY(-8px);
-  box-shadow:0 10px 25px rgba(108,122,124,0.5);
+  box-shadow:0 10px 25px rgba(143,188,143,0.4);
 }
 
 /* IMAGE */
@@ -100,17 +95,17 @@ body {
   margin:10px 0 5px;
 }
 .price {
-  color:#6c7a7c;
+  color:#8fbc8f; /* vert gris */
   font-weight:bold;
   margin-bottom:10px;
 }
 
-/* BEST SELLER */
+/* BEST SELLER BADGE */
 .badge {
   position:absolute;
   top:12px;
   left:12px;
-  background:#6c7a7c;
+  background:#8fbc8f;
   color:black;
   padding:6px 12px;
   border-radius:20px;
@@ -125,7 +120,7 @@ body {
   gap:10px;
 }
 .controls button {
-  background:#6c7a7c;
+  background:#8fbc8f;
   border:none;
   width:32px;
   height:32px;
@@ -147,7 +142,7 @@ body {
   top:20px;
   right:20px;
   background:#111;
-  border:2px solid #6c7a7c;
+  border:2px solid #8fbc8f;
   padding:12px 20px;
   border-radius:30px;
   display:flex;
@@ -174,13 +169,13 @@ body {
 }
 .cart-content h2 {
   text-align:center;
-  color:#6c7a7c;
+  color:#8fbc8f;
 }
 .cart-content button {
   margin-top:10px;
   width:100%;
   padding:12px;
-  background:#25D366;
+  background:#32cd32;
   border:none;
   border-radius:20px;
   font-weight:bold;
@@ -189,13 +184,13 @@ body {
 
 /* FLOAT BUTTON */
 .float-order button {
-  background:#25D366;
+  background:#32cd32;
   padding:15px 35px;
   border:none;
   border-radius:50px;
   font-weight:bold;
   cursor:pointer;
-  box-shadow:0 0 20px #25D366;
+  box-shadow:0 0 20px #32cd32;
 }
 
 /* LOCATION */
@@ -203,12 +198,22 @@ body {
   text-align:center;
   margin:40px 0;
 }
+#map {
+  width:90%;
+  max-width:600px;
+  height:300px;
+  margin:20px auto;
+  border-radius:15px;
+  border:2px solid #8fbc8f;
+}
 .location button {
-  background:#6c7a7c;
+  background:#8fbc8f;
   border:none;
   padding:10px 25px;
   border-radius:10px;
   cursor:pointer;
+  color:black;
+  font-weight:bold;
 }
 </style>
 </head>
@@ -231,8 +236,9 @@ body {
 
 <div class="location">
   <h2>📍 Location</h2>
+  <div id="map"></div>
   <a href="https://www.google.com/maps?q=19.895000663346558,102.14216503795944" target="_blank">
-    <button>Open Map</button>
+    <button>Open Map / Itinéraire</button>
   </a>
 </div>
 
@@ -376,6 +382,20 @@ function render(){
 }
 
 render();
+
+/* MAP */
+function initMap(){
+  const mapDiv = document.getElementById("map");
+  const iframe = document.createElement("iframe");
+  iframe.width="100%";
+  iframe.height="100%";
+  iframe.style.border="0";
+  iframe.loading="lazy";
+  iframe.referrerPolicy="no-referrer-when-downgrade";
+  iframe.src="https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=19.895000663346558,102.14216503795944";
+  mapDiv.appendChild(iframe);
+}
+initMap();
 </script>
 
 </body>
